@@ -66,11 +66,10 @@ public class SubscriptionService {
                 ? subscription.getNoOfScreensSubscribed() * 350 + 1000 
                 : subscription.getNoOfScreensSubscribed() * 250 + 800;  
         
-        Integer alreadyPaid = subscription.getTotalAmountPaid();
-        
         // After upgrading, amount to be paid
-        Integer amountTobePaidAfterUpgrade = amountToBePaid - alreadyPaid;
+        Integer amountTobePaidAfterUpgrade = amountToBePaid - subscription.getTotalAmountPaid();
         subscription.setStartSubscriptionDate(new Date());
+        subscription.setTotalAmountPaid(amountTobePaidAfterUpgrade);
         subscription.setSubscriptionType(
             subscription.getSubscriptionType() == SubscriptionType.PRO 
             ? SubscriptionType.ELITE : SubscriptionType.PRO);
